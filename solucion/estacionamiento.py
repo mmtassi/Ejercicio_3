@@ -38,6 +38,11 @@ class Estadia:
         return tuple(self._modificadores)
 
     def agregar_modificador(self, modificador):
+        try:
+            modificador.aplicar
+        except AttributeError:
+            raise TypeError("El modificador no cumple el contrato")
+
         self._modificadores.append(modificador)
 
     def total(self, tarifa_por_hora):

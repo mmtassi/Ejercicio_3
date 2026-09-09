@@ -21,12 +21,18 @@ def test_horas_invalidas():
         Estadia("AB123CD", 0)
 
 
+def test_modificador_invalido():
+    estadia = Estadia("AB123CD", 2)
+
+    with pytest.raises(TypeError):
+        estadia.agregar_modificador("modificador invalido")
+
+
 def test_modificadores_no_exponen_coleccion_interna():
     estadia = Estadia("AB123CD", 2)
     estadia.agregar_modificador(Nocturna())
 
     modificadores = estadia.modificadores
-
     modificadores = modificadores + (FinDeSemana(),)
 
     assert estadia.total(1000) == 2400
